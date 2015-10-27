@@ -1,70 +1,58 @@
 package com.diego.practica_pelis;
 
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link PelisFragment#newInstance} factory method to
+ * Use the {@link PelisFragment#} factory method to
  * create an instance of this fragment.
  */
 public class PelisFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PelisFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PelisFragment newInstance(String param1, String param2) {
-        PelisFragment fragment = new PelisFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ArrayList<String> arrList;
+    private ArrayAdapter<String> adapter;
 
     public PelisFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-        
-
-
 
     }
 
+    @TargetApi(Build.VERSION_CODES.M)// Debido a que esta funcionalidad esta disponible a partir de la API 23, nos recomienda poner esta anotación
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        String[] datos = {"The Ring","The Lord of Rings","Harry Potter","Resident Evil","World War Z"};
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pelis, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_pelis, container, false); //Primero se crea un objeto del tipo View para extraer
+        //datos del fragment y luego se extrae el contenido del atributo que deseemos, en este caso una ListView, buscandolo por su id.
+        ListView lvPelis = (ListView) rootView.findViewById(R.id.lvPelis);
+
+        arrList = new ArrayList<>(Arrays.asList(datos));
+        adapter = new ArrayAdapter<String>(getContext(), R.layout.pelis_row, R.id.tvPeli, arrList);// para getContext(); es necesaria la anotacion en la parte superior del método
+        lvPelis.setAdapter(adapter);
+
+        return rootView; //retornamos el objeto antes creado y modificado
+
     }
 
 
