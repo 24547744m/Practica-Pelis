@@ -2,9 +2,11 @@ package com.diego.practica_pelis;
 
 
 import android.annotation.TargetApi;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,9 +16,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.pojos.Movies;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+
+import retrofit.Call;
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
+import retrofit.http.GET;
+import retrofit.http.Query;
 
 
 /**
@@ -87,6 +96,14 @@ public class PelisFragment extends Fragment {
 
 
     private void refresh(){
+        String country = "es";
+        ApiClient apiClient = new ApiClient();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String queryType = preferences.getString("query_type", "popular");
+
+        if (queryType.equals("popular")){
+            apiClient.getMostPopularMovies(adapter, country);
+        }
 
 
     }
