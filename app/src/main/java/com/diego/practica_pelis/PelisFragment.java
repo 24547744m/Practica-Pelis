@@ -103,6 +103,8 @@ public class PelisFragment extends Fragment {
 
         if (queryType.equals("popular")){
             apiClient.getMostPopularMovies(adapter, country);
+        }else if (queryType.equals("most_rated")){
+            apiClient.getMostRatedMovies(adapter, country);
         }
 
 
