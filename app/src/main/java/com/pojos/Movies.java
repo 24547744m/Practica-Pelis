@@ -9,7 +9,7 @@ import java.util.Map;
 public class Movies {
 
     private Integer page;
-    private List<Result> results = new ArrayList<Result>();
+    private List<MovieObj> movieObjs = new ArrayList<MovieObj>();
     private Integer totalPages;
     private Integer totalResults;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -35,19 +35,19 @@ public class Movies {
     /**
      * 
      * @return
-     *     The results
+     *     The movieObjs
      */
-    public List<Result> getResults() {
-        return results;
+    public List<MovieObj> getMovieObjs() {
+        return movieObjs;
     }
 
     /**
      * 
-     * @param results
-     *     The results
+     * @param movieObjs
+     *     The movieObjs
      */
-    public void setResults(List<Result> results) {
-        this.results = results;
+    public void setMovieObjs(List<MovieObj> movieObjs) {
+        this.movieObjs = movieObjs;
     }
 
     /**

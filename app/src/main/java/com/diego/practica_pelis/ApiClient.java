@@ -1,11 +1,15 @@
 package com.diego.practica_pelis;
 
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
+import com.pojos.MovieObj;
 import com.pojos.Movies;
 
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.GsonConverterFactory;
+import retrofit.Response;
 import retrofit.Retrofit;
 import retrofit.http.GET;
 import retrofit.http.Query;
@@ -39,18 +43,40 @@ public class ApiClient {
         serviceInterface = retrofit.create(MoviesServiceInterface.class);
     }
 
-    public void getMostPopularMovies(ArrayAdapter<String> adapter, String country){
+    public void getMostPopularMovies(ArrayAdapter<MovieObj> adapter, String country){
         Call<Movies> call = serviceInterface.getMostPopularMovies(country, API_KEY);//Ejecuta el método de la interfaz MoviesServiceInterface enviando parámetros para ejecutarse en una Query
-
+        retrofitProcessCall(adapter, call);
     }
-
-    public void retrofitProcessCall(ArrayAdapter<Movies> adapter, Call<>){
-
-    }
-
-    public void getMostRatedMovies(ArrayAdapter<String> adapter, String country) {
+    public void getMostRatedMovies(ArrayAdapter<MovieObj> adapter, String country) {
         Call<Movies> call = serviceInterface.getMostRatedMovies(country, API_KEY);
-
-
+        retrofitProcessCall(adapter,call);
     }
+
+    public void retrofitProcessCall(final ArrayAdapter<MovieObj> adapter, Call<Movies> call){//Proceso de llamado de Retrofit
+        Log.e("HOLAAAAAAAAAAAAAAAAAa", "HOLAAAAAAAAAAAAAAAAa");
+        call.enqueue(new Callback<Movies>() {
+            @Override
+            public void onResponse(Response<Movies> response, Retrofit retrofit) {
+                if (response.isSuccess()){
+                    Log.e("Success: ", "HAY RESPUESTA");
+                    Movies movies = response.body();
+                    for (MovieObj movie: movies.getMovieObjs()){
+                        adapter.add(movie);
+                    }
+                    adapter.clear();
+
+                    Log.d("Resultados: ", movies.getTotalPages().toString());
+
+                }else{
+                    Log.e("Error: ", response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
 }
