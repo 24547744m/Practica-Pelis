@@ -1,4 +1,4 @@
-package com.diego.practica_pelis;
+package com.diego;
 
 
 import android.annotation.TargetApi;
@@ -14,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.diego.MovieObjAdapter;
+import com.diego.diego.ApiClient;
+import com.diego.diego.R;
 import com.pojos.MovieObj;
 import java.util.ArrayList;
 

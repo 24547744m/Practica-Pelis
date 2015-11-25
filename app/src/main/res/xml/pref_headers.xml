@@ -2,14 +2,14 @@
 
     <!-- These settings headers are only used on tablets. -->
 
-    <header android:fragment="com.diego.practica_pelis.SettingsActivity$GeneralPreferenceFragment"
+    <header android:fragment="com.diego.diego.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="com.diego.practica_pelis.SettingsActivity$NotificationPreferenceFragment"
+        android:fragment="com.diego.diego.SettingsActivity$NotificationPreferenceFragment"
         android:title="@string/pref_header_notifications" />
 
-    <header android:fragment="com.diego.practica_pelis.SettingsActivity$DataSyncPreferenceFragment"
+    <header android:fragment="com.diego.diego.SettingsActivity$DataSyncPreferenceFragment"
         android:title="@string/pref_header_data_sync" />
 
 </preference-headers>

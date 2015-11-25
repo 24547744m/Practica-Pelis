@@ -1,4 +1,4 @@
-package com.diego.practica_pelis;
+package com.diego.diego;
 
 import android.util.Log;
 import android.widget.ArrayAdapter;

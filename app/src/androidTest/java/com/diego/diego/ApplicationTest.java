@@ -1,4 +1,4 @@
-package com.diego.practica_pelis;
+package com.diego.diego;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
